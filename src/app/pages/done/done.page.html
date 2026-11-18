@@ -1,0 +1,31 @@
+<ion-content>
+  <div class="kanban-header">
+    <div class="header-left">
+      <div class="header-icon icon-done">
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </div>
+      <div class="header-text">
+        <h2>Feito</h2>
+        <p *ngIf="tasks$ | async as tasks">{{ tasks.length }} tarefas concluídas</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="kanban-banner banner-done">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    <p>Veja todas as tarefas que foram concluídas.</p>
+  </div>
+
+  <div class="empty-state" *ngIf="(tasks$ | async)?.length === 0">
+    <p>Nenhuma tarefa concluída ainda.</p>
+  </div>
+
+  <div class="task-list" *ngIf="tasks$ | async as tasks">
+    <app-task-card 
+      *ngFor="let task of tasks" 
+      [task]="task"
+      (editTask)="onEdit($event)"
+      (deleteTask)="onDelete($event)">
+    </app-task-card>
+  </div>
+</ion-content>

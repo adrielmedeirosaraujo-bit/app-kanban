@@ -1,0 +1,43 @@
+<div class="kanban-card" [ngClass]="'card-' + task.status">
+  <div class="card-header">
+    <h3 class="card-title">{{ task.title }}</h3>
+    <ion-button fill="clear" size="small" class="more-btn" (click)="openMenu()">
+      <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+  
+  <p class="card-description" *ngIf="task.description">{{ task.description }}</p>
+
+  <div class="card-details" *ngIf="task.status !== 'done'">
+    <div class="detail-item" [ngClass]="'color-' + task.status" *ngIf="task.dueDate">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span *ngIf="task.status === 'todo'">Data de entrega: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+      <span *ngIf="task.status === 'doing'">Previsão de entrega: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+    
+    <div class="detail-item" *ngIf="task.observations">
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      <span>Observações: {{ task.observations }}</span>
+    </div>
+  </div>
+
+  <div class="comments-box" *ngIf="task.status === 'doing' && task.comments">
+    <h4>Comentários / Observações</h4>
+    <p>{{ task.comments }}</p>
+  </div>
+
+  <div class="card-details done-details" *ngIf="task.status === 'done'">
+    <div class="detail-item color-done">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>Concluído em: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+    </div>
+    <ion-icon name="checkmark-circle" class="done-check-icon color-done"></ion-icon>
+  </div>
+
+  <div class="card-actions" *ngIf="task.status !== 'done'">
+    <ion-button fill="clear" size="small" class="move-btn" [ngClass]="'text-' + task.status" (click)="onMove()">
+      <ion-icon name="arrow-forward-outline" slot="start"></ion-icon>
+      {{ nextStatusLabel }}
+    </ion-button>
+  </div>
+</div>

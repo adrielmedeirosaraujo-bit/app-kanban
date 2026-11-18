@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="kanban-header">
+    <div class="header-left">
+      <div class="header-icon icon-todo">
+        <ion-icon name="clipboard-outline"></ion-icon>
+      </div>
+      <div class="header-text">
+        <h2>A fazer</h2>
+        <p *ngIf="tasks$ | async as tasks">{{ tasks.length }} tarefas</p>
+      </div>
+    </div>
+    <ion-button class="add-btn btn-todo" (click)="openCreateModal()">
+      <ion-icon name="add" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="kanban-banner banner-todo">
+    <ion-icon name="information-circle-outline"></ion-icon>
+    <p>Adicione tarefas e organize suas prioridades.</p>
+  </div>
+
+  <div class="empty-state" *ngIf="(tasks$ | async)?.length === 0">
+    <p>Nenhuma tarefa ainda.</p>
+  </div>
+
+  <div class="task-list" *ngIf="tasks$ | async as tasks">
+    <app-task-card 
+      *ngFor="let task of tasks" 
+      [task]="task"
+      (moveTask)="onMove($event)"
+      (editTask)="onEdit($event)"
+      (deleteTask)="onDelete($event)">
+    </app-task-card>
+  </div>
+</ion-content>

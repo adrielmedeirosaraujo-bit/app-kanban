@@ -1,37 +1,156 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* No Dark Mode for this app, explicitly disabled by removing dark.system.css */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+body {
+  --ion-background-color: #f7f9fc;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 100px);
+  color: #888;
+  text-align: center;
+  padding: 32px;
+  font-size: 14px;
+}
+
+/* Custom Header Layout */
+.kanban-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      
+      &.icon-todo { background: var(--ion-color-todo); }
+      &.icon-doing { background: var(--ion-color-doing); }
+      &.icon-done { background: var(--ion-color-done); }
+    }
+
+    .header-text {
+      h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: #222;
+      }
+      p {
+        margin: 4px 0 0 0;
+        font-size: 13px;
+        color: #777;
+      }
+    }
+  }
+
+  .add-btn {
+    --border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    --padding-start: 0;
+    --padding-end: 0;
+    margin: 0;
+    
+    &.btn-todo { --background: var(--ion-color-todo); }
+    &.btn-doing { --background: var(--ion-color-doing); }
+  }
+}
+
+.kanban-banner {
+  margin: 0 16px 16px 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  ion-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  
+  &.banner-todo {
+    background: rgba(0, 84, 233, 0.08);
+    color: var(--ion-color-todo);
+    ion-icon { color: var(--ion-color-todo); }
+  }
+  
+  &.banner-doing {
+    background: rgba(255, 179, 0, 0.1);
+    color: #cc8f00;
+    ion-icon { color: var(--ion-color-doing); }
+  }
+  
+  &.banner-done {
+    background: rgba(45, 211, 111, 0.1);
+    color: #1a8f48;
+    ion-icon { color: var(--ion-color-done); }
+  }
+}
+
+/* Tabs styling */
+.kanban-tab-bar {
+  --border: none;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.02);
+  
+  ion-tab-button {
+    --color: #999;
+    --color-selected: var(--ion-color-primary);
+    
+    &[tab="todo"] { --color-selected: var(--ion-color-todo); }
+    &[tab="doing"] { --color-selected: var(--ion-color-doing); }
+    &[tab="done"] { --color-selected: var(--ion-color-done); }
+    
+    ion-label {
+      font-weight: 500;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+  }
+}
+
+
+ion-content {
+  --background: #f4f6f8;
+}
+.kanban-header {
+  background: white;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+

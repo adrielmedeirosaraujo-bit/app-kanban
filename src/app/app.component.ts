@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TaskService } from './services/task.service';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
-export class AppComponent {
-  constructor() {}
+export class AppComponent implements OnInit {
+  constructor(
+    private taskService: TaskService,
+    private storageService: StorageService
+  ) {}
+
+  async ngOnInit() {
+    await this.storageService.init();
+    await this.taskService.loadTasks();
+  }
 }

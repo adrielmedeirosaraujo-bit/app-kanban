@@ -12,6 +12,15 @@
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
+  <script>
+    window.onerror = function(msg, url, line, col, error) {
+      alert("Error: " + msg + "\nline: " + line);
+    };
+    window.addEventListener('unhandledrejection', function(event) {
+      alert("Unhandled Rejection: " + (event.reason && event.reason.message ? event.reason.message : event.reason));
+    });
+  </script>
+
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
   <!-- add to homescreen for ios -->

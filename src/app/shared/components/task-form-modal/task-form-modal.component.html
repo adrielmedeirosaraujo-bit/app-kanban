@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ task ? 'Editar Tarefa' : 'Nova Tarefa' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input formControlName="title" placeholder="Ex: Criar protótipo do app"></ion-input>
+    </ion-item>
+    <div class="error" *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      O título é obrigatório.
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Descrição (Abaixo do título)</ion-label>
+      <ion-input formControlName="description" placeholder="Ex: Desenvolver o protótipo..."></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Observações (Balão de fala)</ion-label>
+      <ion-textarea formControlName="observations" placeholder="Incluir fluxos principais..." [autoGrow]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Comentários (Caixa Amarela)</ion-label>
+      <ion-textarea formControlName="comments" placeholder="Ex: Aguardando retorno da API..." [autoGrow]="true"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data de entrega</ion-label>
+      <ion-input type="date" formControlName="dueDate"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="form.invalid" class="ion-margin-top">
+      {{ task ? 'Salvar' : 'Criar' }}
+    </ion-button>
+  </form>
+</ion-content>
